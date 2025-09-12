@@ -12,6 +12,7 @@
     
     <name>Sistema de Aparcamiento Pro</name>
     <description>Sistema profesional de gestión de aparcamientos</description>
+    <!-- Project updated -->
     
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

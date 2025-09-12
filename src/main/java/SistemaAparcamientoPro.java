@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 
 public class SistemaAparcamientoPro extends JFrame implements Printable {
     private static final String VERSION = "1.2.0";
@@ -20,15 +19,10 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
     private static final String CONFIG_FILE = "config.properties";
     private static final String TICKETS_FILE = "tickets_activos.txt";
     
-    // Colores del tema
-    private static final Color PRIMARY_COLOR = new Color(41, 128, 185);
-    private static final Color SECONDARY_COLOR = new Color(52, 152, 219);
+    // Colores del tema (solo los utilizados)
     private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
-    private static final Color WARNING_COLOR = new Color(243, 156, 18);
     private static final Color DANGER_COLOR = new Color(231, 76, 60);
-    private static final Color DARK_COLOR = new Color(44, 62, 80);
-    private static final Color LIGHT_COLOR = new Color(236, 240, 241);
-    private static final Color WHITE_COLOR = Color.WHITE;
+    private static final Color SECONDARY_COLOR = new Color(52, 152, 219);
     
     private Map<String, VehicleInfo> espacios;
     private Map<String, TicketInfo> ticketsActivos;
@@ -224,7 +218,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         // Panel de controles con diseño moderno
         JPanel panelControles = new JPanel();
         panelControles.setLayout(new BoxLayout(panelControles, BoxLayout.Y_AXIS));
-        panelControles.setBackground(WHITE_COLOR);
+        panelControles.setBackground(Color.WHITE);
         panelControles.setBorder(new CompoundBorder(
             new EmptyBorder(25, 25, 25, 25),
             new TitledBorder(null, "[VEHICULOS] Gestión y Control", 
@@ -234,7 +228,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         
         // Campos de entrada con estilo
         JPanel panelCampos = new JPanel(new GridBagLayout());
-        panelCampos.setBackground(WHITE_COLOR);
+        panelCampos.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 5, 10, 5);
         gbc.anchor = GridBagConstraints.WEST;
@@ -276,7 +270,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         
         // Panel de botones principales con diseño moderno
         JPanel panelBotonesPrincipales = new JPanel(new GridLayout(2, 3, 10, 10));
-        panelBotonesPrincipales.setBackground(WHITE_COLOR);
+        panelBotonesPrincipales.setBackground(Color.WHITE);
         panelBotonesPrincipales.setBorder(new EmptyBorder(20, 0, 10, 0));
         
         JButton btnEntrada = crearBoton("[+] ENTRADA", new Color(46, 204, 113));
@@ -300,7 +294,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         areaEstado.setEditable(false);
         areaEstado.setFont(new Font("Courier New", Font.PLAIN, 12));
         areaEstado.setBackground(new Color(248, 249, 250));
-        areaEstado.setForeground(DARK_COLOR);
+        areaEstado.setForeground(new Color(44, 62, 80));
         areaEstado.setBorder(new EmptyBorder(15, 15, 15, 15));
         
         JScrollPane scrollPane = new JScrollPane(areaEstado);
@@ -310,7 +304,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
                 TitledBorder.LEFT, TitledBorder.TOP, 
                 new Font("Arial", Font.BOLD, 16), new Color(34, 45, 65))
         ));
-        scrollPane.setBackground(WHITE_COLOR);
+        scrollPane.setBackground(Color.WHITE);
         
         // Panel inferior con botones de administración
         JPanel panelAdmin = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
@@ -365,7 +359,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         add(panelAdmin, BorderLayout.SOUTH);
         
         // Configuración final de la ventana
-        getContentPane().setBackground(WHITE_COLOR);
+        getContentPane().setBackground(Color.WHITE);
         actualizarEstado();
         pack();
         setLocationRelativeTo(null);
@@ -611,10 +605,6 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 12));
             FontMetrics fm = g2d.getFontMetrics();
-            String texto = espacio;
-            if (vehiculo != null) {
-                texto += "\n" + vehiculo.placa;
-            }
             
             int textX = x + (espacioWidth - fm.stringWidth(espacio)) / 2;
             int textY = y + (espacioHeight + fm.getHeight()) / 2;
@@ -1290,7 +1280,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
     private void mostrarMensajePersonalizado(String mensaje, String titulo, int tipo, Color color) {
         // Crear panel personalizado para el mensaje
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(WHITE_COLOR);
+        panel.setBackground(Color.WHITE);
         panel.setBorder(new EmptyBorder(15, 15, 15, 15));
         
         JLabel lblMensaje = new JLabel("<html><div style='text-align: center; font-family: Arial; font-size: 14px;'>" + 
