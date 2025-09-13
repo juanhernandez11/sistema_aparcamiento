@@ -3,6 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.awt.print.*;
 import java.io.*;
 import java.time.LocalDateTime;
@@ -369,11 +370,7 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         configurarTooltips();
         
         // Icono de la aplicación
-        try {
-            setIconImage(Toolkit.getDefaultToolkit().createImage("parking-icon.png"));
-        } catch (Exception e) {
-            // Usar icono por defecto
-        }
+        setIconImage(crearIconoParking());
     }
     
     // Métodos auxiliares para crear componentes con diseño moderno
@@ -487,6 +484,36 @@ public class SistemaAparcamientoPro extends JFrame implements Printable {
         });
         
         return boton;
+    }
+    
+    // Método para crear icono de parking programáticamente
+    private Image crearIconoParking() {
+        BufferedImage icono = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = icono.createGraphics();
+        
+        // Antialiasing para mejor calidad
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        // Fondo azul con degradado
+        GradientPaint gradiente = new GradientPaint(0, 0, new Color(41, 128, 185), 32, 32, new Color(52, 152, 219));
+        g2d.setPaint(gradiente);
+        g2d.fillRoundRect(2, 2, 28, 28, 6, 6);
+        
+        // Borde
+        g2d.setColor(new Color(34, 45, 65));
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawRoundRect(2, 2, 28, 28, 6, 6);
+        
+        // Letra P en blanco
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
+        FontMetrics fm = g2d.getFontMetrics();
+        int x = (32 - fm.stringWidth("P")) / 2;
+        int y = (32 + fm.getAscent() - fm.getDescent()) / 2;
+        g2d.drawString("P", x, y);
+        
+        g2d.dispose();
+        return icono;
     }
     
     private JButton crearBotonSecundario(String texto) {
